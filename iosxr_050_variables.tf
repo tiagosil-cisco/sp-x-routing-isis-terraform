@@ -760,19 +760,19 @@ variable "isis_interfaces" {
       af_ipv6_metric_level  = 2
     },
     37 = {
-      device                 = "p02"
+      device                = "p02"
       process_id            = "CORE"
-      interface_id           = "GigabitEthernet0/0/0/4"
+      interface_id          = "GigabitEthernet0/0/0/4"
       circuit_type          = "level-2-only"
       hello_padding_disable = true
-      point_to_point         = true
-      passive                = false
-      address_family_ipv4    = true
-      af_ipv4_metric         = 200
-      af_ipv4_metric_level   = 2
-      address_family_ipv6    = true
-      af_ipv6_metric         = 200
-      af_ipv6_metric_level   = 2
+      point_to_point        = true
+      passive               = false
+      address_family_ipv4   = true
+      af_ipv4_metric        = 200
+      af_ipv4_metric_level  = 2
+      address_family_ipv6   = true
+      af_ipv6_metric        = 200
+      af_ipv6_metric_level  = 2
     },
     38 = {
       device                = "p02"
