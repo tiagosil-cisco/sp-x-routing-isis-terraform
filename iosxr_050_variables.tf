@@ -1046,7 +1046,7 @@ variable "isis_interfaces" {
       af_ipv6_metric_level  = 2
     },
     56 = {
-      device                = "rrpce02"
+      device                = "rrpce01"
       process_id            = "CORE"
       interface_id          = "GigabitEthernet0/0/0/0"
       circuit_type          = "level-2-only"

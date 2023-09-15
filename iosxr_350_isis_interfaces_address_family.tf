@@ -1,5 +1,6 @@
 
 resource "iosxr_router_isis_interface_address_family" "ipv4_unicast" {
+  depends_on = [iosxr_router_isis_interface.interfaces]
   for_each = {
     for key, value in var.isis_interfaces :
     key => value if value.address_family_ipv4 == true
