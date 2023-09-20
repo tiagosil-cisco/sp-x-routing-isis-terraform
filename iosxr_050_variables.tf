@@ -1,7 +1,17 @@
 locals {
   project_title       = "SP-B"
   project_description = "Topology created using Terraform to represent SP-X"
+  routers             = jsondecode(file("${path.module}/sp-x-devices.json"))
+  isis_info           = jsondecode(file("${path.module}/sp-x-isis-info-variable.json"))
+  isis_interfaces     = jsondecode(file("${path.module}/sp-x-isis-interfaces-variable.json"))
+  isis_interaces_ipv4 = {
+    for key, value in local.isis_interfaces :
+    key => value if value.address_family_ipv4 == true
+  }
 
+
+
+  /*
   routers = [
     {
       name = "pe01"
@@ -52,16 +62,16 @@ locals {
       host = "10.0.1.62"
     },
   ]
-
+*/
   xr_username = "admin"
   xr_password = "C!sco123"
 
 }
-
-variable "routers_info" {
+/*
+variable "isis_info" {
   type = map(any)
   default = {
-    1 = {
+    pe01 = {
       device                          = "pe01"
       process_id                      = "CORE"
       net                             = "49.0001.0010.0031.0001.0001.00"
@@ -74,7 +84,7 @@ variable "routers_info" {
       af_ipv6_metric_style_wide_level = 2
 
     },
-    2 = {
+    pe02 = {
       device                          = "pe02"
       process_id                      = "CORE"
       net                             = "49.0001.0010.0031.0001.0002.00"
@@ -86,7 +96,7 @@ variable "routers_info" {
       af_ipv6_metric_style_wide       = true
       af_ipv6_metric_style_wide_level = 2
     },
-    3 = {
+    p01 = {
       device                          = "p01"
       process_id                      = "CORE"
       net                             = "49.0001.0010.0031.0001.0003.00"
@@ -98,7 +108,7 @@ variable "routers_info" {
       af_ipv6_metric_style_wide       = true
       af_ipv6_metric_style_wide_level = 2
     },
-    4 = {
+    p02 = {
       device                          = "p02"
       process_id                      = "CORE"
       net                             = "49.0001.0010.0031.0001.0004.00"
@@ -110,7 +120,7 @@ variable "routers_info" {
       af_ipv6_metric_style_wide       = true
       af_ipv6_metric_style_wide_level = 2
     },
-    5 = {
+    p03 = {
       device                          = "p03"
       process_id                      = "CORE"
       net                             = "49.0001.0010.0031.0001.0005.00"
@@ -122,7 +132,7 @@ variable "routers_info" {
       af_ipv6_metric_style_wide       = true
       af_ipv6_metric_style_wide_level = 2
     },
-    6 = {
+    p04 = {
       device                          = "p04"
       process_id                      = "CORE"
       net                             = "49.0001.0010.0031.0001.0006.00"
@@ -134,7 +144,7 @@ variable "routers_info" {
       af_ipv6_metric_style_wide       = true
       af_ipv6_metric_style_wide_level = 2
     },
-    7 = {
+    pe03 = {
       device                          = "pe03"
       process_id                      = "CORE"
       net                             = "49.0001.0010.0031.0001.0007.00"
@@ -146,7 +156,7 @@ variable "routers_info" {
       af_ipv6_metric_style_wide       = true
       af_ipv6_metric_style_wide_level = 2
     },
-    8 = {
+    pe04 = {
       device                          = "pe04"
       process_id                      = "CORE"
       net                             = "49.0001.0010.0031.0001.0008.00"
@@ -158,7 +168,7 @@ variable "routers_info" {
       af_ipv6_metric_style_wide       = true
       af_ipv6_metric_style_wide_level = 2
     },
-    9 = {
+    asbr01 = {
       device                          = "asbr01"
       process_id                      = "CORE"
       net                             = "49.0001.0010.0031.0001.0009.00"
@@ -170,7 +180,7 @@ variable "routers_info" {
       af_ipv6_metric_style_wide       = true
       af_ipv6_metric_style_wide_level = 2
     },
-    10 = {
+    asbr02 = {
       device                          = "asbr02"
       process_id                      = "CORE"
       net                             = "49.0001.0010.0031.0001.0010.00"
@@ -182,7 +192,7 @@ variable "routers_info" {
       af_ipv6_metric_style_wide       = true
       af_ipv6_metric_style_wide_level = 2
     },
-    11 = {
+    rrpce01 = {
       device                          = "rrpce01"
       process_id                      = "CORE"
       net                             = "49.0001.0010.0031.0001.0011.00"
@@ -194,7 +204,7 @@ variable "routers_info" {
       af_ipv6_metric_style_wide       = true
       af_ipv6_metric_style_wide_level = 2
     },
-    12 = {
+    rrpce02 = {
       device                          = "rrpce02"
       process_id                      = "CORE"
       net                             = "49.0001.0010.0031.0001.0012.00"
@@ -208,6 +218,7 @@ variable "routers_info" {
     },
   }
 }
+
 
 variable "isis_interfaces" {
   type = map(any)
@@ -1093,3 +1104,4 @@ variable "isis_interfaces" {
 
   }
 }
+*/

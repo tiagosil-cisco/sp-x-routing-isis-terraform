@@ -1,5 +1,5 @@
 resource "iosxr_router_isis_interface" "interfaces" {
-  for_each       = var.isis_interfaces
+  for_each       = local.isis_interfaces
   device         = each.value.device
   process_id     = each.value.process_id
   interface_name = each.value.interface_id

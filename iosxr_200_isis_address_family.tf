@@ -1,9 +1,9 @@
 resource "iosxr_router_isis_address_family" "ipv4" {
   for_each = {
-    for key, value in var.routers_info :
+    for key, value in local.isis_info :
     key => value if value.address_family_ipv4 == true
   }
-  device     = each.value.device
+  device     = each.key
   process_id = each.value.process_id
   af_name    = "ipv4"
   saf_name   = "unicast"
@@ -17,10 +17,10 @@ resource "iosxr_router_isis_address_family" "ipv4" {
 
 resource "iosxr_router_isis_address_family" "ipv6" {
   for_each = {
-    for key, value in var.routers_info :
+    for key, value in local.isis_info :
     key => value if value.address_family_ipv6 == true
   }
-  device     = each.value.device
+  device     = each.key
   process_id = each.value.process_id
   af_name    = "ipv6"
   saf_name   = "unicast"
